@@ -1,7 +1,7 @@
 import { ICompareFunction } from "./compare";
 
 export default class Comparator<T> {
-    compare: ICompareFunction<T>;
+    public compare: ICompareFunction<T>;
     /**
      * @param {function(a: *, b: *)} [ICompareFunction] - It may be custom compare function that, let's
      * say may compare custom objects together.
