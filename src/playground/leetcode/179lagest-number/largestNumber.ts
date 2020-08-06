@@ -37,5 +37,3 @@ function sortCallback(a: number, b: number): number {
         return Number(strB[range]) > Number(strA[0]) ? 1 : -1;
     }
 }
-
-console.log(largestNumber([3, 30, 34, 5, 9]));

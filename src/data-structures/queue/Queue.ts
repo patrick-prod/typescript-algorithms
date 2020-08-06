@@ -21,7 +21,7 @@ export default class Queue<T> {
      * Read the element at the front of the queue without removing it.
      * @return {T}
      */
-    peek(): T {
+    peek(): T | null {
         if (!this.linkedList.head) {
             return null;
         }
@@ -43,7 +43,7 @@ export default class Queue<T> {
      * If the queue is empty, return null.
      * @return {T}
      */
-    dequeue(): T {
+    dequeue(): T | null {
         const removedHead = this.linkedList.deleteHead();
         return removedHead ? removedHead.value : null;
     }

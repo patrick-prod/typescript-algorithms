@@ -1,13 +1,14 @@
 import { ICompareFunction } from "./compare";
 
 export default class Comparator<T> {
-    public compare: ICompareFunction<T>;
+    private compare: ICompareFunction<T>;
+
     /**
      * @param {function(a: *, b: *)} [ICompareFunction] - It may be custom compare function that, let's
      * say may compare custom objects together.
      */
-    constructor(compareFunc: ICompareFunction<T | number | string>) {
-        this.compare = compareFunc || Comparator.defaultCompare;
+    constructor(compareFunc?: ICompareFunction<T>) {
+        this.compare = compareFunc || this.defaultCompare;
     }
 
     /**
@@ -16,7 +17,7 @@ export default class Comparator<T> {
      * @param {(string|number)} b
      * @returns {number}
      */
-    static defaultCompare(a: number | string, b: number | string): number {
+    private defaultCompare<T = string | number>(a: T, b: T): number {
         if (a === b) {
             return 0;
         }

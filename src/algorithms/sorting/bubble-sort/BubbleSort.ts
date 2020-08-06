@@ -11,11 +11,13 @@ export default class BubbleSort<T> extends Sort<T> {
             swapped = false;
 
             // Call visiting callback.
-            this.callbacks.visitingCallback(array[i]);
+            this.callbacks.visitingCallback &&
+                this.callbacks.visitingCallback(array[i]);
 
             for (let j = 0; j < array.length - i; j += 1) {
                 // Call visiting callback.
-                this.callbacks.visitingCallback(array[j]);
+                this.callbacks.visitingCallback &&
+                    this.callbacks.visitingCallback(array[j]);
 
                 // Swap elements if they are in wrong order.
                 if (this.comparator.lessThan(array[j + 1], array[j])) {

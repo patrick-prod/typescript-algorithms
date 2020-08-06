@@ -3,9 +3,9 @@ import Comparator from "../../utils/comparator/Comparator";
 import { ICompareFunction } from "../../utils/comparator/compare";
 
 export default class LinkedList<T> {
-    head: LinkedListNode<T>;
-    tail: LinkedListNode<T>;
-    private compare?: Comparator<T>;
+    head: LinkedListNode<T> | null;
+    tail: LinkedListNode<T> | null;
+    private compare?: Comparator<T> | null;
     /**
      * @param {Function} [comparatorFunction]
      */
@@ -50,8 +50,10 @@ export default class LinkedList<T> {
         }
 
         // Attach new node to the end of linked list.
-        this.tail.next = newNode;
-        this.tail = newNode;
+        if (this.tail) {
+            this.tail.next = newNode;
+            this.tail = newNode;
+        }
 
         return this;
     }
@@ -60,7 +62,12 @@ export default class LinkedList<T> {
      * @param {T} value
      * @return {LinkedListNode}
      */
-    delete(value: T): LinkedListNode<T> {
+    delete(value: T): LinkedListNode<T> | null {
+        if (!this.compare) {
+            throw new Error(
+                "you need to provide compareFunc when instantiate for this method."
+            );
+        }
         if (!this.head) {
             return null;
         }
@@ -89,14 +96,14 @@ export default class LinkedList<T> {
         }
 
         // Check if tail must be deleted.
-        if (this.compare.equal(this.tail.value, value)) {
+        if (this.tail && this.compare.equal(this.tail.value, value)) {
             this.tail = currentNode;
         }
 
         return deletedNode;
     }
 
-    deleteHead(): LinkedListNode<T> {
+    deleteHead(): LinkedListNode<T> | null {
         if (!this.head) {
             return null;
         }
@@ -118,12 +125,17 @@ export default class LinkedList<T> {
      * @param {function} [findParams.callback]
      * @return {LinkedListNode}
      */
-    find({ value = undefined, callback = undefined }): LinkedListNode<T> {
+    find(value: T, callback: (value: T) => boolean): LinkedListNode<T> | null {
+        if (!this.compare) {
+            throw new Error(
+                "you need to provide compareFunc when instantiate for this method."
+            );
+        }
         if (!this.head) {
             return null;
         }
 
-        let currentNode = this.head;
+        let currentNode: LinkedListNode<T> | null = this.head;
 
         while (currentNode) {
             // If callback is specified then try to find node by callback.

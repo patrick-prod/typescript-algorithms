@@ -19,20 +19,17 @@ export default class Stack<T> {
     /**
      * @return {T}
      */
-    peek(): T {
-        if (this.isEmpty()) {
-            // If the linked list is empty then there is nothing to peek from.
-            return null;
-        }
-
+    peek(): T | null {
+        // If the linked list is empty then there is nothing to peek from.
         // Just read the value from the start of linked list without deleting it.
-        return this.linkedList.head.value;
+        // I write in this way because the fucking strictNullChecks.
+        return this.linkedList.head ? this.linkedList.head.value : null;
     }
 
     /**
      * @return {T}
      */
-    pop(): T {
+    pop(): T | null {
         // Let's try to delete the first node (the head) from the linked list.
         // If there is no head (the linked list is empty) just return null.
         const removedHead = this.linkedList.deleteHead();
