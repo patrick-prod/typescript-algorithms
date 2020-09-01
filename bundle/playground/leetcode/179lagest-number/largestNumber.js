@@ -34,5 +34,4 @@ function sortCallback(a, b) {
         return Number(strB[range]) > Number(strA[0]) ? 1 : -1;
     }
 }
-console.log(largestNumber([3, 30, 34, 5, 9]));
 //# sourceMappingURL=largestNumber.js.map
