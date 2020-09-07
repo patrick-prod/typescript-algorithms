@@ -1,43 +1,38 @@
 export default function spiralOrder(matrix: number[][]): number[] {
     let m = matrix.length;
+    if (!m) return [];
     let n = matrix[0].length;
-    let visited = new Array(m);
-    for (let i = 0; i < m; i++) {
-        visited[i] = new Array(n).fill(false);
+    let res: number[] = [],
+        l = 0,
+        t = 0,
+        r = n - 1,
+        b = m - 1,
+        total = m * n;
+
+    while (total >= 1) {
+        for (let i = l; i <= r && total >= 1; i++) {
+            res.push(matrix[t][i]);
+            total--;
+        }
+        t++;
+        for (let i = t; i <= b && total >= 1; i++) {
+            res.push(matrix[i][r]);
+            total--;
+        }
+        r--;
+        for (let i = r; i >= l && total >= 1; i--) {
+            res.push(matrix[b][i]);
+            total--;
+        }
+        b--;
+        for (let i = b; i >= t && total >= 1; i--) {
+            res.push(matrix[i][l]);
+            total--;
+        }
+        l++;
     }
-    let res: number[] = [];
-    dfs(matrix, visited, res, 0, 0);
+
     return res;
-}
-
-function dfs(
-    matrix: number[][],
-    visited: boolean[][],
-    res: number[],
-    i: number,
-    j: number
-): boolean {
-    let m = matrix.length;
-    let n = matrix[0].length;
-
-    if (visited[i][j]) return false;
-
-    let curr = matrix[i][j];
-
-    res.push(curr);
-    visited[i][j] = true;
-
-    if (j >= 0 && j + 1 < n && dfs(matrix, visited, res, i, j + 1)) {
-        return true;
-    } else if (i >= 0 && i + 1 < m && dfs(matrix, visited, res, i + 1, j)) {
-        return true;
-    } else if (j - 1 >= 0 && j < n && dfs(matrix, visited, res, i, j - 1)) {
-        return true;
-    } else if (i - 1 >= 0 && i < m && dfs(matrix, visited, res, i - 1, j)) {
-        return true;
-    }
-
-    return false;
 }
 
 let res = spiralOrder([
