@@ -16,6 +16,9 @@ import TreeNode from "../../../utils/leetcode/TreeNode";
 /**
  Do not return anything, modify root in-place instead.
  */
+
+//TODO
+
 function flatten(root: TreeNode | null): void {
     dfs(root);
 }
