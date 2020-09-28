@@ -13,7 +13,8 @@ export default function isPowerOfFour(num: number): boolean {
     );
     /** 
         return (
-            (num > 0 && (num ^ 0x1) === 0) ||
+            (num > 0 && 
+            (num ^ 0x1) === 0) ||
             (num ^ 0x4) === 0 ||
             (num ^ 0x10) === 0 ||
             (num ^ 0x40) === 0 ||
