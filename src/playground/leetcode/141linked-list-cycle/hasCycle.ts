@@ -1,4 +1,4 @@
-import { ListNode } from "../../../utils/leetcode/listNode";
+import { ListNode } from '../../../utils/leetcode/listNode';
 
 export default function hasCycle(head: ListNode | null) {
     let mark = Number.MAX_VALUE;
